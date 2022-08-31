@@ -1,0 +1,23 @@
+{
+  "name": "type-all-the-things",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "devDependencies": {
+    "typescript": "^4.8.2"
+  },
+  "scripts": {
+    "start": "tsc index.ts && node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Schrubitteflau/type-all-the-things.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Schrubitteflau/type-all-the-things/issues"
+  },
+  "homepage": "https://github.com/Schrubitteflau/type-all-the-things#readme"
+}
