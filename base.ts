@@ -10,13 +10,13 @@ type TypeIdentifier<ValueType extends PrimitiveType, Key extends string> = Value
 
 type RuntimeCheckCallback<ValueType extends PrimitiveType> = (value: ValueType) => boolean;
 
-interface StrictType<ValueType extends PrimitiveType, Key extends string> {
+interface TypeHelpers<ValueType extends PrimitiveType, Key extends string> {
     is: (value: ValueType) => value is TypeIdentifier<ValueType, Key>;
     assert: (value: ValueType) => asserts value is TypeIdentifier<ValueType, Key>;
     convert: (value: ValueType) => TypeIdentifier<ValueType, Key>;
 }
 
-function createStrictType<ValueType extends PrimitiveType, Key extends string>(runtimeCheckFn: RuntimeCheckCallback<ValueType>): StrictType<ValueType, Key>
+function createStrictType<ValueType extends PrimitiveType, Key extends string>(runtimeCheckFn: RuntimeCheckCallback<ValueType>): TypeHelpers<ValueType, Key>
 {
     function typeguardFn(value: ValueType): value is TypeIdentifier<ValueType, Key> {
         return runtimeCheckFn(value);
