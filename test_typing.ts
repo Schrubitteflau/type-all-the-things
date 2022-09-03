@@ -82,3 +82,24 @@ let s2 = s1; // s2 is 'IPv4Address'
 
 let s3: string = "";
 let s4 = ipv4Address.to(s3); // s4 is 'IPv4Address'
+
+// We can't create a structural compatible type, thanks to '__internalSymbol'
+declare const __internalSymbol: unique symbol;
+type PrimitiveType = number | string;
+export type TypeIdentifier<ValueType extends PrimitiveType, Key extends string> = ValueType & {
+    __primitive: ValueType;
+    [__internalSymbol]: true;
+} & Record<Key, true>;
+
+type MyIPv4Address = TypeIdentifier<string, "IPv4Address">;
+
+const s5: MyIPv4Address = s1; // Type 'IPv4Address' is not assignable to type 'MyIPv4Address'.
+/*
+Property '[__internalSymbol]' is missing in type 'String &
+    { __primitive: string; [__internalSymbol]: true; } &
+    Record<"IPv4Address", true>'
+but required in type '{ __primitive: string; [__internalSymbol]: true; }'.
+*/
+
+const s6: MyIPv4Address = {} as any;
+const s7: IPv4Address = s6; // Same error : Type 'MyIPv4Address' is not assignable to type 'IPv4Address'.
