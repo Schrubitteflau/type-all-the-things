@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "target": "es6",
+        "strict": true,
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "strictNullChecks": true,
+        "noImplicitOverride": true,
+        "resolveJsonModule": true,
+        "lib": ["DOM", "ES2017"]
+    }
+}
