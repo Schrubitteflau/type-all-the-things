@@ -3,62 +3,70 @@ declare const __internalSymbol: unique symbol;
 
 type PrimitiveType = number | string;
 
-type TypeIdentifier<ValueType extends PrimitiveType, Key> = ValueType & {
+type TypeIdentifier<ValueType extends PrimitiveType, Key extends string> = ValueType & {
     __key: Key;
     __primitive: ValueType;
     [__internalSymbol]: true;
 };
 
-type InferPrimitive<TID> = TID extends { __primitive: infer Primitive } ? Primitive : never;
-type InferKey<TID> = TID extends { __key: infer Key } ? Key : never;
+type TIDPrimitive<TID> = TID extends { __primitive: infer Primitive } ? Primitive : never;
+type TIDKey<TID> = TID extends { __key: infer Key } ? Key : never;
 
-type RuntimeCheckCallback<ValueType extends PrimitiveType> = (value: ValueType) => boolean;
-type ErrorMessageCallback<ValueType extends PrimitiveType> = (value: ValueType) => string;
+type RuntimeCheckCallback<TID> = (value: TIDPrimitive<TID>) => boolean;
+type ErrorMessageCallback<TID> = (value: TIDPrimitive<TID>) => string;
 
-interface TypeHelpers<ValueType extends PrimitiveType, Key extends string> {
-    is: (value: ValueType) => value is TypeIdentifier<ValueType, Key>;
-    assert: (value: ValueType) => asserts value is TypeIdentifier<ValueType, Key>;
-    convert: (value: ValueType) => TypeIdentifier<ValueType, Key>;
+interface TypeHelpers<TID> {
+    is: (value: any) => value is TID;
+    assert: (value: any) => asserts value is TID;
+    convert: (value: any) => TID;
+    primitive: (value: TID) => TIDPrimitive<TID>;
 }
 
-function rawMakeTypeHelpers<ValueType extends PrimitiveType, Key extends string>(runtimeCheckCb: RuntimeCheckCallback<ValueType>, errorMessageCb: ErrorMessageCallback<ValueType>): TypeHelpers<ValueType, Key>
+function makeTypeHelpers<TID extends TypeIdentifier<any, any>>(runtimeCheckCb: RuntimeCheckCallback<TID>, errorMessageCb: ErrorMessageCallback<TID>): TypeHelpers<TID>
 {
-    function typeguardFn(value: ValueType): value is TypeIdentifier<ValueType, Key> {
+    function typeguardFn(value: any): value is TID {
         return runtimeCheckCb(value);
     };
 
-    function assertFn(value: ValueType): asserts value is TypeIdentifier<ValueType, Key> {
+    function assertFn(value: any): asserts value is TID {
         if (!runtimeCheckCb(value)) {
             throw new Error(errorMessageCb(value));
         }
     };
 
-    function toFn(value: ValueType): TypeIdentifier<ValueType, Key> {
+    function toFn(value: any): TID {
         assertFn(value);
         return value;
+    }
+
+    function primitiveFn(value: TID): TIDPrimitive<TID> {
+        return value as TIDPrimitive<TID>;
     }
 
     return {
         is: typeguardFn,
         assert: assertFn,
-        convert: toFn
+        convert: toFn,
+        primitive: primitiveFn
     };
 }
 
-type Percent = TypeIdentifier<number, "Percent">;
+// ---
 
-function makeTypeHelpers<TID>()
+type NumericType<Key extends string> = TypeIdentifier<number, Key>;
+
+
+type Percent = NumericType<"Percent">;
+type PositiveInteger = NumericType<"PositiveInteger">;
+
+const percent = makeTypeHelpers<Percent>(() => true, () => "");
+
+let p1: Percent = 1 as any
+let p2: PositiveInteger = 1 as any
+let p3: number = 1
+let p4: number = p1
+
+if (percent.is(p2))
 {
-    
+    p2
 }
-
-
-function makeTypeHelpersFromTypeIdentifier<TID>(): [InferKey<TID>, InferPrimitive<TID>]
-{
-    return {} as any;
-}
-
-
-// example usage
-
-const aaa = makeTypeHelpersFromTypeIdentifier<Percent>();

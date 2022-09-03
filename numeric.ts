@@ -1,4 +1,4 @@
-type NumericType<Key extends string> = TypeIdentifier<number, Key>;
+/*type NumericType<Key extends string> = TypeIdentifier<number, Key>;
 type NumericHelpers<Key extends string> = TypeHelpers<number, Key>;
 
 type PositiveInteger = NumericType<"PositiveInteger">;
@@ -26,3 +26,4 @@ const d: number = 1;
 PositiveInteger.assert(d);
 let e = d; // inferred as StrictType<number, "PositiveInteger">
 e = 1;
+*/
