@@ -11,5 +11,6 @@
         "noImplicitOverride": true,
         "resolveJsonModule": true,
         "lib": ["DOM", "ES2017"]
-    }
+    },
+    "exclude": ["test_typing.ts"]
 }

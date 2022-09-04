@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Schrubitteflau/type-all-the-things/issues"
   },
-  "homepage": "https://github.com/Schrubitteflau/type-all-the-things#readme"
+  "homepage": "https://github.com/Schrubitteflau/type-all-the-things#readme",
+  "dependencies": {
+    "joi": "^17.6.0"
+  }
 }

@@ -16,14 +16,14 @@ type ErrorMessageCallback<TID> = (value: TIDPrimitive<TID>) => string;
 export interface TypeHelpers<TID> {
     is: (value: any) => value is TID;
     assert: (value: any) => asserts value is TID;
-    to: (value: any) => TID;
+    from: (value: any) => TID;
 }
 
 export type NamedHelpers<Helpers extends TypeHelpers<any>, Name extends string> = {
     [Property in keyof Helpers as `${Property & string}${Name}`]: Helpers[Property];
 }
 
-interface MakeTypeHelpersParams<TID> {
+export interface MakeTypeHelpersParams<TID> {
     validate: RuntimeCheckCallback<TID>;
     errorMessage: ErrorMessageCallback<TID>;
 }
@@ -40,7 +40,7 @@ export function makeTypeHelpers<TID extends TypeIdentifier<any, any>>({ validate
         }
     };
 
-    function toFn(value: any): TID {
+    function fromFn(value: any): TID {
         assertFn(value);
         return value;
     }
@@ -48,7 +48,7 @@ export function makeTypeHelpers<TID extends TypeIdentifier<any, any>>({ validate
     return {
         is: typeguardFn,
         assert: assertFn,
-        to: toFn
+        from: fromFn
     };
 }
 
