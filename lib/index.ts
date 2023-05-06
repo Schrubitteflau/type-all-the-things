@@ -1,3 +1,5 @@
 export { makeTypeHelpers, nameHelpers, TypeHelpers, NamedHelpers } from "./core";
-export { NumericType } from "./numeric";
-export { StringType } from "./string";
+
+import type { TypeIdentifier } from "./core";
+export type NumericType<Key extends string> = TypeIdentifier<number, Key>;
+export type StringType<Key extends string> = TypeIdentifier<string, Key>;

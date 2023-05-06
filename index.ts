@@ -33,11 +33,10 @@ try {
     console.log((e as Error).message); // Error: Value should be between 0 and 100, received -1
 }
 
-// Since this library provides only a way to link runtime checks to staticly typed primitive types,
-// I recommend using an external validation library, such a Joi
-
+/* Since this library only provides a way to link runtime checks to staticly typed primitive types, it is
+possible to use any 3rd party validation library, such as Joi */
 function joiAdapter(schema: joi.StringSchema) {
-    return (value: any) => typeof(schema.validate(value).error) === "undefined"; 
+    return (value: any) => typeof(schema.validate(value).error) === "undefined";
 }
 
 // First, let's create the validation function
@@ -85,7 +84,6 @@ const { isLongString } = nameHelpers(longStringHelpers, "LongString");
 const { isEmail } = nameHelpers(emailHelpers, "Email");
 
 const myString: string = "aaaaaaaaaa@aaaaa.com";
-console.log("MAINTENANT")
 
 // Let's try to combine two different types, but with the same underlying primitive
 
