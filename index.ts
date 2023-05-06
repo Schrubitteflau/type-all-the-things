@@ -52,8 +52,8 @@ const emailHelpers = makeTypeHelpers<Email>({
 });
 
 try {
-    const email: Email = emailHelpers.from("jambon@cochon.org");
-    console.log(email, typeof email); // 'jambon@cochon.org' string
+    const email: Email = emailHelpers.from("baguette@paris.org");
+    console.log(email, typeof email); // 'baguette@paris.org' string
     const notAnEmail: Email = emailHelpers.from("not an email");
 } catch (e) {
     console.log((e as Error).message); // 'not an email' is not a valid email address

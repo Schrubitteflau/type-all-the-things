@@ -48,6 +48,35 @@ if (isEmail(myString)) {
 }
 ```
 
+## Usage
+
+```ts
+// First, let's create the validation function
+function validateIsEmail() { ... }
+// Then, let's create the type
+type Email = StringType<"Email">;
+// Finally, let's make the type helpers functions to handle this type
+const emailHelpers = makeTypeHelpers<Email>({
+    validate: validateIsEmail,
+    errorMessage(value) {
+        return `'${value}' is not a valid email address`;
+    }
+});
+
+// Start using it
+try {
+    const email: Email = emailHelpers.from("baguette@paris.org");
+    console.log(email, typeof email); // 'baguette@paris.org' string
+    const notAnEmail: Email = emailHelpers.from("not an email");
+} catch (e) {
+    console.log((e as Error).message); // 'not an email' is not a valid email address
+}
+
+// You can also try assert() and is() methods
+emailHelpers.is(value);
+emailHelpers.assert(value);
+```
+
 ## Possible improvements
 
 Since this side project should be seen as a proof of concept, there are many ways to improve it, assuming that there is a real use case.
