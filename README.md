@@ -79,10 +79,10 @@ emailHelpers.assert(value);
 
 ## Possible improvements
 
-Since this side project should be seen as a proof of concept, there are many ways to improve it, assuming that there is a real use case.
+Since this side project should be seen as a proof of concept, there are many ways to improve it, assuming that there is a real use case. For example :
 - Make the VBTs composable, to combine them and prevent code duplication
 - Integrate basic built-in VBTs, that are the most common. An example could be `PositiveInteger`
 
 ## Final words
 
-Thanks for reading me ! Don't hesitate to open an issue for any suggestion or question !
+Thanks for reading me ! Don't hesitate to open an issue for any suggestion or question :)
