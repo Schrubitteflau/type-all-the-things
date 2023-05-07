@@ -82,6 +82,7 @@ emailHelpers.assert(value);
 Since this side project should be seen as a proof of concept, there are many ways to improve it, assuming that there is a real use case. For example :
 - Make the VBTs composable, to combine them and prevent code duplication
 - Integrate basic built-in VBTs, that are the most common. An example could be `PositiveInteger`
+- Find a better name for VBT, since it's not clear. Maybe something like "tagged type" or "verified type" would be better
 
 ## Final words
 
