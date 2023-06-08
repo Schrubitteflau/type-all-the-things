@@ -1,6 +1,10 @@
 # type-all-the-things
 
-The purpose behind this piece of code is to provide an easy and efficient way to bind a primitive value to a static type. The value is not wrapped, which means nothing will change at runtime, the value will still be a primitive value. The way it works is simple :
+The purpose behind this piece of code is to provide an easy and efficient way to bind a primitive value to a static type. The value is not wrapped, which means nothing will change at runtime, the value will still be a primitive value. I later on identified two official issues related to the problem I'm aiming to solve :
+- https://github.com/microsoft/TypeScript/issues/202
+- https://github.com/microsoft/TypeScript/issues/4895
+
+The way it works is simple :
 1. You explicitely declare your new type, for example `Percent`, which purpose is to hold an integer between 0 and 100. I'll now refer to this kind of type as a `validation bounded type`, or `VBT`
 2. You create and link a validation function to the type
 3. You're good to go ! Start frenzy typing :)
