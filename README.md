@@ -4,6 +4,8 @@ The purpose behind this piece of code is to provide an easy and efficient way to
 - https://github.com/microsoft/TypeScript/issues/202
 - https://github.com/microsoft/TypeScript/issues/4895
 
+/!\ On November 16 2023, something happened. I discovered [zod .brand](https://github.com/colinhacks/zod#brand), making my code completely useless. Wait, that was already the case, wasn't it ?
+
 The way it works is simple :
 1. You explicitely declare your new type, for example `Percent`, which purpose is to hold an integer between 0 and 100. I'll now refer to this kind of type as a `validation bounded type`, or `VBT`
 2. You create and link a validation function to the type
